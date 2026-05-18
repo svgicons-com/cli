@@ -1,0 +1,44 @@
+{
+  "name": "@svgicons-com/cli",
+  "version": "0.1.0",
+  "description": "Svg/icons CLI for icon search, Pro collections, exports, project scanning, and license workflows.",
+  "homepage": "https://svgicons.com/docs/cli-alpha",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svgicons-com/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/svgicons-com/cli/issues"
+  },
+  "keywords": [
+    "svg",
+    "icons",
+    "cli",
+    "icon-search",
+    "svg-icons",
+    "icon-collections",
+    "developer-tools"
+  ],
+  "type": "module",
+  "bin": {
+    "svgicons": "./bin/svgicons.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "RELEASE_NOTES.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "private": false
+}

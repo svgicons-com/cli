@@ -1,0 +1,17 @@
+node_modules/
+coverage/
+.nyc_output/
+
+.env
+.env.*
+!.env.example
+
+*.log
+*.tgz
+*.tar
+*.tar.gz
+*.zip
+
+/exports/
+/icons/
+/33716-arrow-circle-up-fill.svg
