@@ -126,6 +126,12 @@ node bin/svgicons.js --help
 
 See `CONTRIBUTING.md` before opening a pull request and `SECURITY.md` for responsible vulnerability reporting.
 
+## Related developer resources
+
+- MCP setup, prompts, examples, and AI coding workflows: https://github.com/svgicons-com/mcp
+- REST API, OpenAPI, SDK, examples, and recipes: https://github.com/svgicons-com/api
+- Website MCP docs: https://svgicons.com/developers/mcp
+
 ## Local project checks
 
 ```bash
