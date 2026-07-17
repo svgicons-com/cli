@@ -1,14 +1,14 @@
 # Svg/icons CLI
 
-The Svg/icons CLI connects your terminal to [svgicons.com](https://svgicons.com), a growing search engine of 312K+ open-source SVG icons and icon sets for developer projects. It is designed for frontend developers, product engineers, and teams who want to find the right icon faster and move it into a real codebase without breaking their workflow.
+The Svg/icons CLI connects your terminal to [svgicons.com](https://svgicons.com), a growing search engine of 320K+ open-source SVG icons and icon sets for developer projects. It is designed for frontend developers, product engineers, and teams who want to find the right icon faster and move it into a real codebase without breaking their workflow.
 
 With the CLI, you can search icons, inspect metadata, download SVG files, scan an existing project for icon needs, ask for icon recommendations from a UI brief, create Icon Collections, add icons to collections, queue framework-ready exports, build a local icon folder, and generate license/provenance reports.
 
-Public icon search works without changing the default endpoint. Pro workflows require a Svg/icons Pro Plan API token, including raw SVG access, Icon Collections, exports, recommendations that create collections, and project synchronization. These features are built to speed up icon selection for both new interfaces and existing projects by keeping discovery, selection, export, and license checks in one repeatable developer workflow.
+Public icon search works without changing the default endpoint. Pro workflows require a Svg/icons [Pro Plan](https://svgicons.com/pricing) API token (€6/$7 per month or €69/$79 lifetime), including raw SVG access, Icon Collections, exports, recommendations that create collections, and project synchronization. On the website, Icon Collections are also available to free Member accounts through a one-time trial allowance of 15 Pro credits — the CLI and API always need a Pro API token. These features are built to speed up icon selection for both new interfaces and existing projects by keeping discovery, selection, export, and license checks in one repeatable developer workflow.
 
 The scanner is read-only by default. It never edits project files unless a future command explicitly adds that behavior.
 
-Current package version: `0.1.0`.
+Current package version: `0.1.1`.
 
 ## Requirements
 
@@ -38,6 +38,20 @@ svgicons doctor
 Pro API tokens may start with a numeric prefix and a pipe character, such as `10|...`. Keep the full token and wrap it in quotes when using a shell command.
 
 You can also avoid writing a config file by setting `SVGICONS_TOKEN` or `SVGICONS_API_TOKEN`.
+
+Credential precedence, highest first:
+
+1. `--token` on commands that accept it.
+2. `SVGICONS_TOKEN`.
+3. `SVGICONS_API_TOKEN`.
+4. The token stored by `svgicons login` in the CLI config file.
+
+Base URL precedence, highest first:
+
+1. `--base-url` on commands that accept it.
+2. `SVGICONS_BASE_URL`.
+3. The stored CLI config base URL.
+4. `https://svgicons.com`.
 
 Inspect local config without exposing the stored token:
 
@@ -106,7 +120,15 @@ This package is a stable `0.1.x` release. It is intended for real projects, whil
 
 See `RELEASE_NOTES.md` for included workflows, safety notes, and known limitations.
 
-Maintainers should use `../docs/svgicons-cli-npm-publishing.md` before publishing a new npm version.
+## Website features without CLI commands yet
+
+The svgicons.com website has grown faster than the CLI in a few areas. To keep expectations honest, these workflows currently have no CLI command:
+
+- Collection maintenance helpers: sort icons, duplicate a collection, and clear all icons are website-only actions (`collection rename`, `update`, `remove`, and `delete` are available).
+- Icon Studio: customizing an icon (colors, stroke width, size, orientation, backgrounds) and its component exports happen on the website.
+- My Custom Icons and My Styles: creating and editing custom icons and saved styles — including applying a style to a whole collection — are website workflows.
+
+Collections you build or style on the website remain fully usable from the CLI: `collection show` and `collection export` include custom-styled entries, and exports keep their customized snapshots. When you export a styled collection without `--color-policy`, the server defaults it to `preserve` so the customized colors survive; plain collections keep the `currentColor` default.
 
 ## License and service access
 
@@ -125,12 +147,6 @@ node bin/svgicons.js --help
 ```
 
 See `CONTRIBUTING.md` before opening a pull request and `SECURITY.md` for responsible vulnerability reporting.
-
-## Related developer resources
-
-- MCP setup, prompts, examples, and AI coding workflows: https://github.com/svgicons-com/mcp
-- REST API, OpenAPI, SDK, examples, and recipes: https://github.com/svgicons-com/api
-- Website MCP docs: https://svgicons.com/developers/mcp
 
 ## Local project checks
 
@@ -358,3 +374,10 @@ To create a collection from existing icon URLs found in the scan, opt in explici
 ```bash
 svgicons scan . --create-collection
 ```
+
+## Related developer resources
+
+- MCP setup, prompts, examples, and AI coding workflows: https://github.com/svgicons-com/mcp
+- REST API, OpenAPI, SDK, examples, and recipes: https://github.com/svgicons-com/api
+- Website CLI docs: https://svgicons.com/docs/cli
+- Website MCP docs: https://svgicons.com/developers/mcp
