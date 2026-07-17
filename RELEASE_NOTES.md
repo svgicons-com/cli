@@ -1,17 +1,27 @@
-# Svg/icons CLI 0.1.0
+# Svg/icons CLI 0.1.1
 
-This is the first stable pre-1.0 release of the Svg/icons CLI on npm. It removes the alpha package wording while keeping the current command surface compatible with the alpha series.
+This patch release updates the npm package metadata for the public GitHub repository.
 
-## New in 0.1.0
+## New in 0.1.1
 
-- Promotes the package from `0.1.0-alpha.5` to `0.1.0`.
+- Adds npm package metadata for the public GitHub repository, issues page, homepage, and package keywords.
+- Keeps the CLI source code under the MIT License.
+- Keeps command behavior unchanged from `0.1.0`.
+
+## 0.1.0
+
+This is the first stable pre-1.0 release of the Svg/icons CLI on npm. It removes prerelease package wording while keeping the current command surface compatible with the earlier preview series.
+
+### New in 0.1.0
+
+- Promotes the package to stable version `0.1.0`.
 - Licenses the CLI source code under MIT while keeping hosted Pro API access governed by Svg/icons account terms.
 - Updates package metadata, help text, README, and documentation for the stable install command.
 - Includes the local read-only `svgicons check` command for generated artifact checks.
 - Keeps current Pro workflows for search, recommendations, Icon Collections, exports, project sync/build, PNG export, and license checks.
 - Keeps the same no-runtime-dependency CLI package shape.
 
-## Included Workflows
+### Included Workflows
 
 - Token login/logout plus `auth status`, known scopes, config inspection, and `doctor`.
 - Public icon search through the hosted MCP endpoint, with authenticated search when a token is configured.
@@ -27,7 +37,7 @@ This is the first stable pre-1.0 release of the Svg/icons CLI on npm. It removes
 - `pick` for deterministic first-result selection, plus opt-in interactive terminal selection.
 - Backward-compatible `kit` alias for collection commands.
 
-## Safety Notes
+### Safety Notes
 
 - The scanner is read-only by default. It writes only when `--write-manifest` or `--create-collection` is used.
 - `svgicons check` is read-only, does not call svgicons.com, does not require authentication, and does not run build tools.
@@ -36,7 +46,7 @@ This is the first stable pre-1.0 release of the Svg/icons CLI on npm. It removes
 - Tokens and authorization headers are redacted from config and diagnostic output.
 - SVG download remains strict: the reference must include both icon ID and name.
 
-## Known Limitations
+### Known Limitations
 
 - This is a stable `0.1.x` release, not `1.0.0`; command names and JSON response shapes may receive compatible refinements before `1.0.0`.
 - The interactive picker is intentionally simple and terminal-only.
@@ -45,36 +55,9 @@ This is the first stable pre-1.0 release of the Svg/icons CLI on npm. It removes
 - Live Pro workflows require an active Pro account, verified email, and API token scopes matching the command.
 - The MIT license covers the CLI package code only. It does not grant free access to hosted Pro APIs, API tokens, subscriptions, generated export services, or third-party icon set licenses.
 
-## Previous Alpha Releases
+## Earlier Preview Builds
 
-### 0.1.0-alpha.5
-
-- Version bump for npm alpha publication after `0.1.0-alpha.4`.
-- No runtime command changes from `0.1.0-alpha.4`.
-- Kept the package README and release notes aligned with the current CLI export surface.
-
-### 0.1.0-alpha.4
-
-- Added single-icon PNG export with `svgicons icon png`, including PNG and ZIP variant downloads.
-- Added collection PNG pack export with size, density, background, color, padding, and fit options.
-- Added collection export format support for `svelte`, `solid`, `blade`, `storybook`, `npm-package`, and `iconify-json`.
-- Added `png` as a shorthand for the `png-pack` collection export format.
-- Added safe framework export options: `--default-size`, `--component-suffix`, `--title-prop`, `--no-title-prop`, `--decorative`, and `--no-decorative`.
-- Added npm package export metadata options: `--package-name` and `--package-version`.
-- Added `svgicons export download <export-id> --collection <collection>` for downloading queued collection export ZIPs.
-- Updated CLI docs and tests for the newer Pro API export formats.
-
-### 0.1.0-alpha.3
-
-- Improved token setup safety. `login` rejects obviously truncated numeric tokens, which commonly happens when a shell command is run without quoting a Sanctum-style token containing `|`.
-
-### 0.1.0-alpha.2
-
-- Removed local-development wording from the public npm README. Runtime behavior was unchanged from `0.1.0-alpha.1`.
-
-### 0.1.0-alpha.1
-
-- Prepared the CLI for real Pro Plan workflows against the svgicons.com Laravel backend.
+Earlier preview builds prepared the Pro Plan workflows, PNG export commands, extended collection export formats, package scaffold options, token setup safety, and public npm documentation that became part of the stable `0.1.0` release.
 
 ## Verification Checklist
 

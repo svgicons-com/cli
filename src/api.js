@@ -82,7 +82,7 @@ export async function proApiDownload(pathOrUrl, options = {}) {
     const headers = {
       Accept: 'image/png, application/zip, application/octet-stream',
       Authorization: `Bearer ${token}`,
-      'User-Agent': 'svgicons-cli/0.1.0',
+      'User-Agent': 'svgicons-cli/0.1.1',
       ...options.headers,
     };
     const init = {
@@ -127,7 +127,7 @@ export async function proApiDownload(pathOrUrl, options = {}) {
 async function request(url, options = {}) {
   const headers = {
     Accept: 'application/json',
-    'User-Agent': 'svgicons-cli/0.1.0',
+    'User-Agent': 'svgicons-cli/0.1.1',
     ...options.headers,
   };
 

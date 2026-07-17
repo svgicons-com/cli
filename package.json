@@ -1,8 +1,8 @@
 {
   "name": "@svgicons-com/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Svg/icons CLI for icon search, Pro collections, exports, project scanning, and license workflows.",
-  "homepage": "https://svgicons.com/docs/cli-alpha",
+  "homepage": "https://svgicons.com/docs/cli",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/svgicons-com/cli.git"
