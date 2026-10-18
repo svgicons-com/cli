@@ -4,11 +4,11 @@ The Svg/icons CLI connects your terminal to [svgicons.com](https://svgicons.com)
 
 With the CLI, you can search icons, inspect metadata, download SVG files, scan an existing project for icon needs, ask for icon recommendations from a UI brief, create Icon Collections, add icons to collections, queue framework-ready exports, build a local icon folder, and generate license/provenance reports.
 
-Public icon search works without changing the default endpoint. Pro workflows require a Svg/icons [Pro Plan](https://svgicons.com/pricing) API token (€6/$7 per month or €69/$79 lifetime), including raw SVG access, Icon Collections, exports, recommendations that create collections, and project synchronization. On the website, Icon Collections are also available to free Member accounts through a one-time trial allowance of 15 Pro credits — the CLI and API always need a Pro API token. These features are built to speed up icon selection for both new interfaces and existing projects by keeping discovery, selection, export, and license checks in one repeatable developer workflow.
+Public icon search works without changing the default endpoint. Pro workflows require a Svg/icons [Pro Plan](https://svgicons.com/pricing) API token (€6/$7 per month or €69/$79 lifetime), including raw SVG access, Icon Collections, exports, recommendations that create collections, and project synchronization. On the website, Icon Collections are also available to free Member accounts through a one-time trial allowance of 15 Pro credits — these CLI and API Pro workflows require a Pro API token. These features are built to speed up icon selection for both new interfaces and existing projects by keeping discovery, selection, export, and license checks in one repeatable developer workflow.
 
 The scanner is read-only by default. It never edits project files unless a future command explicitly adds that behavior.
 
-Current package version: `0.1.1`.
+Latest published npm version checked on 17 October 2026: `0.1.0`.
 
 ## Requirements
 
@@ -20,6 +20,34 @@ Install the stable package:
 ```bash
 npm install -g @svgicons-com/cli
 ```
+
+## Public metadata quick start
+
+You can search and inspect metadata without logging in. For a project-local install instead of the global install above, use a separate directory:
+
+```bash
+npm install --save-exact --ignore-scripts --no-audit --no-fund @svgicons-com/cli@0.1.0
+node node_modules/@svgicons-com/cli/bin/svgicons.js --help
+node node_modules/@svgicons-com/cli/bin/svgicons.js version
+node node_modules/@svgicons-com/cli/bin/svgicons.js search "arrow left" --anonymous --limit 5 --json
+node node_modules/@svgicons-com/cli/bin/svgicons.js icon show 33716 --json
+node node_modules/@svgicons-com/cli/bin/svgicons.js icon url 33716-arrow-circle-up-fill
+node node_modules/@svgicons-com/cli/bin/svgicons.js pick "settings gear" --json
+```
+
+These CLI arguments were validated with version 0.1.0 on Windows, Node 24.21.0 and npm 11.19.0 on 17 October 2026. The validation used absolute executable paths, an empty isolated CLI configuration and no token; the paths above are shortened for readability. It also used Node's `--use-system-ca` option for the local TLS issue described below. No authenticated Pro export was tested.
+
+`search --anonymous` explicitly omits authentication. For other read commands, existing environment variables or saved credentials still follow the precedence documented below. `pick` without `--download` or `--add` selects metadata only; it chooses the first result, not necessarily the best match or the same icon family as your application.
+
+### Filter one family and paginate
+
+```bash
+node node_modules/@svgicons-com/cli/bin/svgicons.js search "folder" --anonymous --icon-set lucide-svg-icons --limit 10 --json
+node node_modules/@svgicons-com/cli/bin/svgicons.js search "search" --anonymous --icon-set lucide-svg-icons --limit 10 --json
+node node_modules/@svgicons-com/cli/bin/svgicons.js search "search" --anonymous --icon-set lucide-svg-icons --limit 10 --offset 10 --json
+```
+
+`--icon-set` restricts the family, `--limit` sets the page size, and `--offset` advances through results. In the validation, the exact Lucide `search` icon (ID 113793) appeared on the second page. Results can change; inspect the returned names, set, license and pagination metadata rather than assuming an exact name will rank first. Anonymous responses contained metadata with `svgIncluded: false`, not SVG files.
 
 ## Login
 
@@ -192,7 +220,7 @@ svgicons icon png 33716-arrow-circle-up-fill --size 512 --color black --backgrou
 
 Single-icon PNG export uses the Pro REST API, not the public anonymous search API. The token needs `icons:read` and `exports:create`. The icon reference must include both ID and name, and the server verifies that the name matches before rendering.
 
-Read-only icon commands accept a numeric ID, an `id-name` reference, or a full svgicons.com icon URL:
+Read-only icon commands accept a numeric ID, an `id-name` reference, or a full svgicons.com icon URL. `icon show` retrieves metadata and `icon url` returns the page URL; both were validated without a token. Read-only does not mean anonymous: `icon raw` requires Pro access to retrieve SVG markup, as do the raw SVG download workflows described above:
 
 ```bash
 svgicons icon show 33716
@@ -374,6 +402,12 @@ To create a collection from existing icon URLs found in the scan, opt in explici
 ```bash
 svgicons scan . --create-collection
 ```
+
+## Windows TLS troubleshooting
+
+If npm reports `UNABLE_TO_VERIFY_LEAF_SIGNATURE`, investigate the certificate chain. In the Windows validation with Node 24.21.0, running Node with [`--use-system-ca`](https://nodejs.org/api/cli.html#--use-system-ca) resolved this error while keeping TLS verification enabled. The option reads the system certificate store for that process; no certificate installation or global npm configuration change was needed.
+
+Check that your Node version supports the option before using it. This is an environment-specific observation, not a requirement for every installation or proof of a service defect. Do not disable TLS verification to work around the error.
 
 ## Related developer resources
 
